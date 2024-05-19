@@ -18,6 +18,8 @@ Residao aims to provide a decentralized marketplace where residents of rural are
 
 To get started with Residao, follow the instructions below to set up your development environment.
 
+[Build on MiniPay](https://docs.celo.org/developer/build-on-minipay/overview)
+
 ## Architecture
 
 Residao is built on the Celo blockchain and leverages smart contracts to manage transactions, user verification, and governance. The key components include:
