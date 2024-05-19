@@ -51,7 +51,7 @@ Residao is built on the Celo blockchain and leverages smart contracts to manage 
 
 Smart contracts are deployed on the Celo blockchain, ensuring transparency and security for all platform operations.
 
-## Technologies Used
+## Technologies
 
 - **Blockchain**: Celo
 - **Smart Contracts**: Solidity
