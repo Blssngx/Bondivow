@@ -112,8 +112,8 @@ export const SwipeCarousel = () => {
     }
 
     return (
-        <div className={`${bgColor(imgIndex)} relative overflow-hidden h-screen py-8 items-center place-content-center justify-center`}>
-            <div className="w-full absolute top-10 px-5 space-y-10">
+        <div className={`${bgColor(imgIndex)} relative overflow-hidden h-[90vh] items-center place-content-center justify-center`}>
+            <div className="w-full absolute top-10 px-5 ">
                 <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
             </div>
             <motion.div
@@ -165,7 +165,6 @@ export const SwipeCarousel = () => {
 
             </motion.div>
             <div className="w-full absolute bottom-20 px-5 ">
-
                 <div className="flex space-x-2 ">
                     <Link
                         href="/sign-in"
@@ -178,53 +177,11 @@ export const SwipeCarousel = () => {
                            Get Started
                         </Button>
                     </Link>
-                    {/* <Link
-                        href="/sign-up"
-                        className="text-black w-full border-none"
-                    >
-                        <Button type="button"
-                            className="text-black w-full h-[45px] bg-[#9ccbed] rounded-[25px] border-[1px]"
-                            variant={"default"}
-                        >
-                            Sign Up
-                        </Button>
-                    </Link> */}
                 </div >
             </div>
 
 
         </div >
-    );
-};
-
-const Images = ({ imgIndex }: { imgIndex: number }) => {
-    return (
-        <>
-            {imgs.map((imgSrc, idx) => {
-                return (
-                    <motion.div
-                        key={idx}
-                        style={{
-                            backgroundImage: `url(${imgSrc})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                        }}
-                        animate={{
-                            scale: imgIndex === idx ? 0.95 : 0.85,
-                        }}
-                        transition={SPRING_OPTIONS}
-                        className="aspect-video w-screen shrink-0 rounded-xl bg-neutral-800 object-cover"
-                    >
-                        {/* <div className="mt-4 flex w-full justify-center gap-2">
-                            <div className="items-center text-center px-5">
-                                <h1 className="text-4xl font-bold py-5">{title(imgIndex)}</h1>
-                                <p className="pb-10">{subTitle(imgIndex)}</p>
-                            </div>
-                        </div> */}
-                    </motion.div>
-                );
-            })}
-        </>
     );
 };
 
@@ -242,20 +199,11 @@ const Dots = ({
                     <button
                         key={idx}
                         onClick={() => setImgIndex(idx)}
-                        className={`h-3 w-3 rounded-full border border-black transition-colors ${idx === imgIndex ? "bg-black" : "bg-transparent"
+                        className={`h-3 w-3 rounded border border-black transition-colors ${idx === imgIndex ? "bg-transparent" : "bg-gray-300"
                             }`}
                     />
                 );
             })}
         </div>
-    );
-};
-
-const GradientEdges = () => {
-    return (
-        <>
-            <div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-neutral-950/50 to-neutral-950/0" />
-            <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-neutral-950/50 to-neutral-950/0" />
-        </>
     );
 };
