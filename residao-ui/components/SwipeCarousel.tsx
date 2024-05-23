@@ -2,9 +2,9 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import onbording_1 from "../img/onboarding_1.svg";
-import onbording_2 from "../img/onboarding_1.svg";
-import onbording_3 from "../img/onboarding_1.svg";
-import onbording_4 from "../img/onboarding_1.svg";
+import onbording_2 from "../img/onboarding_2.svg";
+import onbording_3 from "../img/onboarding_3.svg";
+import onbording_4 from "../img/onboarding_4.svg";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
@@ -62,13 +62,13 @@ export const SwipeCarousel = () => {
     const bgColor = (index: Number) => {
         switch (index) {
             case 0:
-                return "bg-[#DCBAFE]";
+                return "bg-[#F8FCFF]";
             case 1:
-                return "bg-[#FFEB82]";
+                return "bg-[#F8FCFF]";
             case 2:
                 return "bg-[#F8FCFF]";
             case 3:
-                return "bg-[#D7E7FF]";
+                return "bg-[#F8FCFF]";
         }
     }
 
@@ -113,6 +113,9 @@ export const SwipeCarousel = () => {
 
     return (
         <div className={`${bgColor(imgIndex)} relative overflow-hidden h-screen py-8 items-center place-content-center justify-center`}>
+            <div className="w-full absolute top-10 px-5 space-y-10">
+                <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
+            </div>
             <motion.div
                 drag="x"
                 dragConstraints={{
@@ -129,6 +132,7 @@ export const SwipeCarousel = () => {
                 onDragEnd={onDragEnd}
                 className="flex cursor-grab items-center active:cursor-grabbing"
             >
+
                 {imgs.map((imgSrc, idx) => {
                     return (
                         <motion.div
@@ -147,11 +151,11 @@ export const SwipeCarousel = () => {
                             <Image
                                 src={onboardSVG(imgIndex)}
                                 alt="onboarding"
-                                className=" w-screen px-10 shrink-0 rounded-xl bg-transparent object-cover"
+                                className="w-6/12 pl-5 shrink-0 rounded-xl bg-transparent object-cover"
                             />
                             <div className="mt-4 flex w-full justify-center gap-2 space-x-2">
                                 <div className="items-center text-center px-5">
-                                    <h1 className="text-4xl font-bold py-5 text-left">{title(imgIndex)}</h1>
+                                    <h1 className="text-4xl font-bold w-10/12 py-5 text-left">{title(imgIndex)}</h1>
                                     <p className="pb-10 text-left">{subTitle(imgIndex)}</p>
                                 </div>
                             </div>
@@ -160,23 +164,23 @@ export const SwipeCarousel = () => {
                 })}
 
             </motion.div>
-            <div className="w-full absolute bottom-20 px-5 space-y-10">
-                <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
+            <div className="w-full absolute bottom-20 px-5 ">
+
                 <div className="flex space-x-2 ">
-                    <Link 
-                    href="/sign-in"
-                    className="text-black w-full border-none"
+                    <Link
+                        href="/sign-in"
+                        className="text-black w-full border-none"
                     >
                         <Button type="button"
                             className="text-black w-full h-[45px] bg-transparent rounded-[25px] border-[1px] border-black"
                             variant={"secondary"}
                         >
-                            Log In
+                           Get Started
                         </Button>
                     </Link>
-                    <Link 
-                    href="/sign-up"
-                    className="text-black w-full border-none"
+                    {/* <Link
+                        href="/sign-up"
+                        className="text-black w-full border-none"
                     >
                         <Button type="button"
                             className="text-black w-full h-[45px] bg-[#9ccbed] rounded-[25px] border-[1px]"
@@ -184,7 +188,7 @@ export const SwipeCarousel = () => {
                         >
                             Sign Up
                         </Button>
-                    </Link>
+                    </Link> */}
                 </div >
             </div>
 
