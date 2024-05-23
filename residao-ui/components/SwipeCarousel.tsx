@@ -75,7 +75,7 @@ export const SwipeCarousel = () => {
     const title = (index: Number) => {
         switch (index) {
             case 0:
-                return "Welcome to RESIDAO";
+                return "Welcome to Residao";
             case 1:
                 return "Decentralized Marketplace";
             case 2:
