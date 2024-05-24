@@ -17,7 +17,7 @@ export default function BottomNavBar() {
             <div className="mx-auto px-4 lg:px-8 flex justify-center items-center h-full">
                 <div className="gap-8 grid justify-center items-center grid-cols-3">
                     <NavLink text="FEED" to="/feed" iconType="feed" />
-                    <NavLink text="RESIDAO" to="/governance" iconType="logo" />
+                    <NavLink text="RESIDAO" to="/residao" iconType="logo" />
                     <NavLink text="PROFILE" to="/wallet" iconType="profile" />
                     {/* <NavLink text="Trading" to="/protrading" iconType="gavel" /> */}
                 </div>
