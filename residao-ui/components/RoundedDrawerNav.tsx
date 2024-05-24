@@ -49,7 +49,7 @@ export const RoundedDrawerNavExample = () => {
                     </p>
                 </div>
             </RoundedDrawerNav>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col w-full justify-center items-center">
                 <BottomNavBar />
             </div>
         </div>

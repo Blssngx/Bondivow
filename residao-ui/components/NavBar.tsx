@@ -13,9 +13,9 @@ type NavLinkProps = {
 
 export default function BottomNavBar() {
     return (
-        <footer className="bg-neutral-950 rounded-full h-16 bottom-5 fixed ">
-            <div className="mx-auto px-4 lg:px-8 flex justify-center items-center h-full">
-                <div className="gap-8 grid justify-center items-center grid-cols-3">
+        <footer className="bg-neutral-950 rounded-full h-12 bottom-5 fixed w-10/12 mx-auto">
+            <div className="px-4 lg:px-8 flex justify-center items-center h-full">
+                <div className="grid grid-cols-3 gap-4 w-full">
                     <NavLink text="FEED" to="/feed" iconType="feed" />
                     <NavLink text="RESIDAO" to="/residao" iconType="logo" />
                     <NavLink text="PROFILE" to="/wallet" iconType="profile" />
@@ -41,16 +41,17 @@ const NavLink = ({
                 onMouseLeave={() => setIsHovered(false)}
                 href={to}
                 rel="nofollow"
-              className='flex flex-col items-center justify-center w-full h-full text-white transition-colors hover:text-black'
+                className={`text-sm ${isHovered || isActive ? "text-black rounded-full bg-white px-2 py-1" : "text-white"} transition-colors flex items-center justify-center contect-place-center`}
+            //   className='flex flex-col items-center justify-center w-full h-full text-white transition-colors hover:text-black'
             >
-                  {isActive && <div className='h-2 w-2 rounded-full bg-white mb-1' />}
-                <div   className={`text-sm ${isHovered || isActive ? "text-black rounded-full bg-white px-2 py-1" : "text-white"} transition-colors flex items-center justify-center contect-place-center`}> 
-                    <IconComponent
-                        fillColor={isHovered || isActive ? "black" : "white"}
-                        className="w-5 h-5 "
-                    />
-                    {isActive && <span className={`font-bold text-xs ml-1`}>{text}</span>}
-                </div>
+
+
+                <IconComponent
+                    fillColor={isHovered || isActive ? "black" : "white"}
+                    className="w-5 h-5 "
+                />
+                {isActive && <span className={`font-bold text-xs ml-1`}>{text}</span>}
+
 
             </Link>
         </>
