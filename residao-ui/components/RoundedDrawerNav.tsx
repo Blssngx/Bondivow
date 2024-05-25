@@ -10,6 +10,7 @@ import { FiCircle, FiCrop, FiMenu } from "react-icons/fi";
 import BottomNavBar from "./NavBar";
 import { useEffect } from "react";
 import { useAccount } from "wagmi";
+import Davatar from '@davatar/react';
 
 export const RoundedDrawerNavExample = () => {
     return (
@@ -130,7 +131,16 @@ const RoundedDrawerNav = ({
                         onClick={() => setMobileNavOpen((pv) => !pv)}
                         className="mt-0.5 block text-2xl text-neutral-50 md:hidden"
                     >
-                        <FiCircle />
+                        {isConnected ? (
+                            <div className="border border-white rounded-full bg-white">
+                                <Davatar
+                                    size={20}
+                                    address={address || ""}
+                                />
+                            </div>
+                        ) : (
+                            <FiCircle />
+                        )}
                     </button>
                 </div>
                 {isConnected ? (
