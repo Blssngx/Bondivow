@@ -6,11 +6,24 @@ import React, {
     useState,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiCircle, FiCrop, FiMenu } from "react-icons/fi";
+import { FiArrowUpRight, FiCircle, FiCrop, FiMenu } from "react-icons/fi";
 import BottomNavBar from "./NavBar";
 import { useEffect } from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useReadContract } from "wagmi";
 import Davatar from '@davatar/react';
+import { celoAlfajores } from "viem/chains";
+import {
+    erc20Abi,
+    formatEther,
+    parseEther,
+    createWalletClient,
+    custom,
+    stringToHex,
+    createPublicClient,
+    http,
+} from "viem";
+
+const cUSDTokenAddressTestnet = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 
 export const RoundedDrawerNavExample = () => {
     return (
@@ -75,7 +88,7 @@ const RoundedDrawerNav = ({
 }) => {
     const [hovered, setHovered] = useState<string | null>(null);
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
+    const [userAddress, setUserAddress] = useState<`0x${string}` | null>(null);
     const activeSublinks = useMemo(() => {
         if (!hovered) return [];
         const link = links.find((l) => l.title === hovered);
@@ -83,9 +96,18 @@ const RoundedDrawerNav = ({
         return link ? link.sublinks : [];
     }, [hovered]);
 
-    const [userAddress, setUserAddress] = useState("");
+    // const [userAddress, setUserAddress] = useState("");
     const [isMounted, setIsMounted] = useState(false);
     const { address, isConnected } = useAccount();
+
+    const { data: balance } = useReadContract({
+        abi: erc20Abi,
+        address: cUSDTokenAddressTestnet,
+        functionName: "balanceOf",
+        args: [userAddress!],
+        chainId: celoAlfajores.id,
+        query: { enabled: !!userAddress },
+    });
 
     useEffect(() => {
         setIsMounted(true);
@@ -100,6 +122,9 @@ const RoundedDrawerNav = ({
     if (!isMounted) {
         return null;
     }
+
+    const formatCurrency = (amount: number | bigint) =>
+        new Intl.NumberFormat('en-US', { style: 'decimal', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount);
 
 
     return (
@@ -143,14 +168,88 @@ const RoundedDrawerNav = ({
                         )}
                     </button>
                 </div>
-                {isConnected ? (
+                {/* {isConnected ? (
+
                     <div className="h2 text-center text-white">
                         Your address: {userAddress}
-                    </div>
-                ) : (
-                    <div className="h2 text-center text-white">No Wallet Connected</div>
-                )}
-                <MobileLinks links={links} open={mobileNavOpen} />
+                    </div>) : (<div className="h2 text-center text-white">No Wallet Connected</div>)} */}
+
+                    {!isConnected && (
+                       <div className="h2 text-center text-white">No Wallet Connected</div>)}
+   
+                <AnimatePresence mode="popLayout">
+                    {mobileNavOpen && (
+                        <motion.div
+                            initial={{
+                                opacity: 0,
+                            }}
+                            animate={{
+                                opacity: 1,
+                            }}
+                            exit={{
+                                opacity: 0,
+                            }}
+                            // className="grid grid-cols-2 gap-6 py-6 md:hidden"
+                        >
+                            {isConnected ? (
+                                <>
+                                    {/* <div className="h2 text-center text-white">
+                            Your address: {userAddress}
+                        </div> */}
+                                    <div className="flex justify-between h-50 mt-5 gap-1">
+                                        <div className="h-25 w-1/2 p-4 text-white bg-[#D6DFEA] rounded-xl ">
+                                            <div className="flex items-center justify-between mb-5">
+                                                <div>
+                                                    <p className="text-[#353535] font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
+                                                    <p className="text-[#353535] text-xs">+12.5%</p>
+                                                </div>
+                                                <div className="rounded-full bg-white p-2">
+                                                    <FiArrowUpRight className="text-[#353535] h-6 w-6" />
+                                                </div>
+                                            </div>
+                                            <p className="text-[#353535] font-bold">Balance</p>
+                                        </div>
+                                        <div className="h-25 w-1/2 p-4 text-white bg-[#D6DFEA] rounded-xl">
+                                            <div className="flex items-center justify-between mb-5">
+                                                <div>
+                                                    <p className="text-[#353535] font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
+                                                    <p className="text-[#353535] text-xs">+12.5%</p>
+                                                </div>
+                                                <div className="rounded-full bg-white p-2">
+                                                    <FiArrowUpRight className="text-[#353535] h-6 w-6" />
+                                                </div>
+                                            </div>
+                                            <p className="text-[#353535] font-bold">Income</p>
+                                        </div>
+                                    </div>
+
+
+                                </>
+
+                            ) : (
+                                <div className="h2 text-center text-white">No Wallet Connected</div>
+                            )}
+                            {/* {links.map((l) => {
+                                return (
+                                    <div key={l.title} className="space-y-1.5">
+                                        <span className="text-md block font-semibold text-neutral-50">
+                                            {l.title}
+                                        </span>
+                                        {l.sublinks.map((sl) => (
+                                            <a
+                                                className="text-md block text-neutral-300"
+                                                href={sl.href}
+                                                key={sl.title}
+                                            >
+                                                {sl.title}
+                                            </a>
+                                        ))}
+                                    </div>
+                                );
+                            })} */}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </nav>
             <motion.main layout className={`${navBackground} px-2 pb-2`}>
                 <div className={`${bodyBackground} rounded-3xl`}>{children}</div>
