@@ -9,8 +9,10 @@ import { http, WagmiProvider, createConfig } from "wagmi";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
 import { celo, celoAlfajores } from "wagmi/chains";
+import { ToastProvider } from "@/components/ui/toast";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
 
 const connectors = connectorsForWallets(
     [
@@ -42,7 +44,9 @@ function App({ Component, pageProps }: AppProps) {
             <QueryClientProvider client={queryClient}>
                 <RainbowKitProvider>
                     {/* <Layout> */}
-                        <Component {...pageProps} />
+
+                    <Component {...pageProps} />
+                    <Toaster />
                     {/* </Layout> */}
                 </RainbowKitProvider>
             </QueryClientProvider>
