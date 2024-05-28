@@ -33,7 +33,7 @@ export const Layer = ({
     children?: ReactNode;
 }) => {
     return (
-        <div className="bg-neutral-950 h-screen">
+        <div className="bg-[#0E100F] h-screen">
             <RoundedDrawerNav
                 links={[
                     {
@@ -50,7 +50,7 @@ export const Layer = ({
                         ],
                     },
                 ]}
-                navBackground="bg-neutral-950"
+                navBackground="bg-[#0E100F]"
                 bodyBackground="bg-white"
             >
                 {/* <div className="flex flex-col items-center justify-center px-12 py-32">

@@ -13,7 +13,7 @@ type NavLinkProps = {
 
 export default function BottomNavBar() {
     return (
-        <footer className="bg-neutral-950 rounded-full h-12 bottom-5 fixed w-9/12 mx-auto">
+        <footer className="bg-[#0E100F] rounded-full h-12 bottom-5 fixed w-9/12 mx-auto">
             <div className="px-[1.5px] flex justify-center items-center h-full">
                 <div className="grid grid-cols-3 gap-1 w-full">
                     <NavLink text="FEED" to="/feed" iconType="feed" />
