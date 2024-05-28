@@ -101,7 +101,7 @@ const RoundedDrawerNav = ({
         const link = links.find((l) => l.title === hovered);
 
         return link ? link.sublinks : [];
-    }, [hovered]);
+    }, [hovered, links]);
 
     // const [userAddress, setUserAddress] = useState("");
     const [isMounted, setIsMounted] = useState(false);
