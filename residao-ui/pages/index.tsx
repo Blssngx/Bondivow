@@ -1,4 +1,4 @@
-import { RoundedDrawerNavExample } from "@/components/RoundedDrawerNav";
+import { Layer } from "@/components/RoundedDrawerNav";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
@@ -34,6 +34,6 @@ export default function Home() {
         //         <div>No Wallet Connected</div>
         //     )}
         // </div>
-        <RoundedDrawerNavExample />
+        <Layer></Layer>
     );
 }

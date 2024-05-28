@@ -1,7 +1,7 @@
 import BottomNavBar from "@/components/NavBar";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import { RoundedDrawerNavExample } from "@/components/RoundedDrawerNav";
+import { Layer } from "@/components/RoundedDrawerNav";
 
 export default function Home() {
     const [userAddress, setUserAddress] = useState("");
@@ -23,6 +23,7 @@ export default function Home() {
     }
 
     return (
-        <RoundedDrawerNavExample />
+        <Layer>
+        </Layer>
     );
 }

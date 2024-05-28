@@ -23,6 +23,8 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { useAccount } from "wagmi";
 import { FiArrowLeft } from 'react-icons/fi';
+import { Layer } from '@/components/RoundedDrawerNav';
+import Ripple from '@/components/magicui/ripple';
 
 const FormSchema = z.object({
     pin: z.string().min(6, {
@@ -46,10 +48,19 @@ const VoucherPage: React.FC = () => {
     }, [address, isConnected]);
 
     return (
-        <div className="flex flex-col justify-center items-center h-[100vh] relative">
-            <FiArrowLeft className="absolute text-2xl top-4 left-4 cursor-pointer" onClick={() => window.history.back()} />
-            {isConnected && (<InputOTPForm address={userAddress ?? ''} />)}
-        </div>
+        <Layer>
+            <div className="relative flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg border bg-background p-20 md:shadow-xl">
+                <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-white">
+                  Voucher
+                </p>
+                <Ripple />
+            </div>
+            <div className="flex pb-5 flex-col justify-center items-center relative">
+                {/* <FiArrowLeft className="absolute text-2xl top-4 left-4 cursor-pointer" onClick={() => window.history.back()} /> */}
+                {isConnected && (<InputOTPForm address={userAddress ?? ''} />)}
+            </div>
+        </Layer>
+
     );
 };
 
@@ -103,13 +114,13 @@ export function InputOTPForm({ address }: { address: string }) {
     return (
         <>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-9/12 h-screen items-center justify-center space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-9/12 items-center justify-center space-y-6">
                     <FormField
                         control={form.control}
                         name="pin"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Voucher number</FormLabel>
+                                {/* <FormLabel>Voucher number</FormLabel> */}
                                 <FormControl>
                                     <InputOTP maxLength={8} {...field}>
                                         <InputOTPGroup>

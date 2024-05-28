@@ -1,4 +1,5 @@
 import React, {
+    Children,
     Dispatch,
     ReactNode,
     SetStateAction,
@@ -26,7 +27,11 @@ import Link from "next/link";
 
 const cUSDTokenAddressTestnet = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 
-export const RoundedDrawerNavExample = () => {
+export const Layer = ({
+    children,
+}: {
+    children?: ReactNode;
+}) => {
     return (
         <div className="bg-neutral-950 h-screen">
             <RoundedDrawerNav
@@ -48,7 +53,7 @@ export const RoundedDrawerNavExample = () => {
                 navBackground="bg-neutral-950"
                 bodyBackground="bg-white"
             >
-                <div className="flex flex-col items-center justify-center px-12 py-32">
+                {/* <div className="flex flex-col items-center justify-center px-12 py-32">
                     <p className="text-center">
 
                     </p>
@@ -62,7 +67,8 @@ export const RoundedDrawerNavExample = () => {
                     <p className="text-center">
 
                     </p>
-                </div>
+                </div> */}
+                {children}
             </RoundedDrawerNav>
             <div className="flex flex-col w-full justify-center items-center">
                 <BottomNavBar />
@@ -175,7 +181,7 @@ const RoundedDrawerNav = ({
                         Your address: {userAddress}
                     </div>) : (<div className="h2 text-center text-white">No Wallet Connected</div>)}
 
-                    {/* {!isConnected && (
+                {/* {!isConnected && (
                        <div className="h2 text-center text-white">No Wallet Connected</div>)}
     */}
                 <AnimatePresence mode="popLayout">
@@ -190,7 +196,7 @@ const RoundedDrawerNav = ({
                             exit={{
                                 opacity: 0,
                             }}
-                            // className="grid grid-cols-2 gap-6 py-6 md:hidden"
+                        // className="grid grid-cols-2 gap-6 py-6 md:hidden"
                         >
                             {isConnected ? (
                                 <>
