@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+"use client"
+import { useState, FormEvent, useEffect } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -20,64 +21,46 @@ import {
     InputOTPSeparator,
 } from "@/components/ui/input-otp"
 import { toast } from "@/components/ui/use-toast"
+import { useAccount } from "wagmi";
+import { FiArrowLeft } from 'react-icons/fi';
 
 const FormSchema = z.object({
     pin: z.string().min(6, {
-        message: "Your one-time password must be 6 characters.",
+        message: "Your voucher must be 8 characters.",
     }),
 })
 
-const GetVoucher: React.FC = () => {
-    const [token, setToken] = useState<string>('');
-    const [transactionHash, setTransactionHash] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+const VoucherPage: React.FC = () => {
+    const [userAddress, setUserAddress] = useState<`0x${string}` | null>(null);
+    const [isMounted, setIsMounted] = useState(false);
+    const { address, isConnected } = useAccount();
 
-    const address = "0x80C8Ab0d65868CcB0AF23D99762196AFe2aa18A7";
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-
-        try {
-            const res = await fetch('http://localhost:8080/api/getVoucher/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ toAddress: address, token })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setTransactionHash(data.transactionHash);
-                setError(null);
-            } else {
-                setTransactionHash(null);
-                setError(data.message || 'Error occurred');
-            }
-        } catch (error) {
-            setTransactionHash(null);
-            setError('Error occurred while sending the request');
+    useEffect(() => {
+        if (isConnected && address) {
+            setUserAddress(address);
         }
-    };
+    }, [address, isConnected]);
 
     return (
-        <div>
-            <h1>Get Voucher</h1>
-            <InputOTPForm />
+        <div className="flex flex-col justify-center items-center h-[100vh] relative">
+            <FiArrowLeft className="absolute text-2xl top-4 left-4 cursor-pointer" onClick={() => window.history.back()} />
+            {isConnected && (<InputOTPForm address={userAddress ?? ''} />)}
         </div>
     );
 };
 
-export default GetVoucher;
+export default VoucherPage;
 
 
-export function InputOTPForm() {
+export function InputOTPForm({ address }: { address: string }) {
     const [token, setToken] = useState<string>('');
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
 
-    const address = "0x80C8Ab0d65868CcB0AF23D99762196AFe2aa18A7";
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -117,11 +100,10 @@ export function InputOTPForm() {
         }
     }
 
-
     return (
         <>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-9/12 h-screen items-center justify-center space-y-6">
                     <FormField
                         control={form.control}
                         name="pin"
@@ -129,7 +111,7 @@ export function InputOTPForm() {
                             <FormItem>
                                 <FormLabel>Voucher number</FormLabel>
                                 <FormControl>
-                                    <InputOTP maxLength={9} {...field}>
+                                    <InputOTP maxLength={8} {...field}>
                                         <InputOTPGroup>
                                             <InputOTPSlot index={0} />
                                             <InputOTPSlot index={1} />
@@ -143,23 +125,21 @@ export function InputOTPForm() {
                                             <InputOTPSlot index={6} />
                                             <InputOTPSlot index={7} />
                                         </InputOTPGroup>
-                                        <InputOTPSeparator />
-                                        <InputOTPGroup>
-                                            <InputOTPSlot index={8} />
-                                            {/* <InputOTPSlot index={9} />
-                                        <InputOTPSlot index={10} />
-                                        <InputOTPSlot index={11} /> */}
-                                        </InputOTPGroup>
                                     </InputOTP>
                                 </FormControl>
                                 <FormDescription>
-                                    Load a voucher to add to your balance.
+                                    Load a voucher to add to your balance {address}.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Load</Button>
+                    <Button
+                        className='w-full h-12 rounded-2xl text-xs font-bold'
+                        variant={"secondary"}
+                        type="submit">
+                        LOAD VOUCHER
+                    </Button>
                 </form>
             </Form>
             {transactionHash && (

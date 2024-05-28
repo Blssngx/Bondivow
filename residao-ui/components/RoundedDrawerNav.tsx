@@ -6,7 +6,7 @@ import React, {
     useState,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiArrowUpRight, FiCircle, FiCrop, FiMenu } from "react-icons/fi";
+import { FiArrowUpRight, FiCircle, FiCrop, FiMenu, FiPlus } from "react-icons/fi";
 import BottomNavBar from "./NavBar";
 import { useEffect } from "react";
 import { useAccount, useReadContract } from "wagmi";
@@ -22,6 +22,7 @@ import {
     createPublicClient,
     http,
 } from "viem";
+import Link from "next/link";
 
 const cUSDTokenAddressTestnet = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 
@@ -168,15 +169,15 @@ const RoundedDrawerNav = ({
                         )}
                     </button>
                 </div>
-                {/* {isConnected ? (
+                {isConnected ? (
 
                     <div className="h2 text-center text-white">
                         Your address: {userAddress}
-                    </div>) : (<div className="h2 text-center text-white">No Wallet Connected</div>)} */}
+                    </div>) : (<div className="h2 text-center text-white">No Wallet Connected</div>)}
 
-                    {!isConnected && (
+                    {/* {!isConnected && (
                        <div className="h2 text-center text-white">No Wallet Connected</div>)}
-   
+    */}
                 <AnimatePresence mode="popLayout">
                     {mobileNavOpen && (
                         <motion.div
@@ -203,9 +204,10 @@ const RoundedDrawerNav = ({
                                                     <p className="text-[#353535] font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
                                                     <p className="text-[#353535] text-xs">+12.5%</p>
                                                 </div>
-                                                <div className="rounded-full bg-white p-2">
-                                                    <FiArrowUpRight className="text-[#353535] h-6 w-6" />
-                                                </div>
+                                                <Link href="/voucher" className="rounded-full bg-white p-2">
+                                                    <FiPlus className="text-[#353535] h-6 w-6" />
+                                                    {/* <FiArrowUpRight className="text-[#353535] h-6 w-6" /> */}
+                                                </Link>
                                             </div>
                                             <p className="text-[#353535] font-bold">Balance</p>
                                         </div>
