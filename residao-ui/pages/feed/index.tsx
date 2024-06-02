@@ -128,7 +128,7 @@ const FeedPage: React.FC = () => {
                             fillColor={activeTab === 'goods' ? "white" : "black"}
                             className="w-5 h-5 "
                         />
-                        <span className={`${activeTab === 'goods' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Goods</span>
+                   {activeTab === 'goods' &&     <span className={`${activeTab === 'goods' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Goods</span>}
 
                     </button>
                     <button
@@ -142,7 +142,7 @@ const FeedPage: React.FC = () => {
                             fillColor={activeTab === 'services' ? "white" : "black"}
                             className="w-5 h-5 "
                         />
-                        <span className={`${activeTab === 'services' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Services</span>
+                        {activeTab === 'services' &&   <span className={`${activeTab === 'services' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Services</span>}
                     </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
