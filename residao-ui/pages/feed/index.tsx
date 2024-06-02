@@ -90,12 +90,16 @@ import axios from 'axios';
 import classNames from 'classnames';
 import { Layer } from '@/components/RoundedDrawerNav';
 import { Icons } from '@/components/icons';
+import Image from 'next/image';
+import ItemCard from '@/components/item-card';
 
 interface Item {
     id: number;
     name: string;
     description: string;
     type: 'goods' | 'services';
+    image: string;
+    price: string;
 }
 
 const FeedPage: React.FC = () => {
@@ -128,7 +132,7 @@ const FeedPage: React.FC = () => {
                             fillColor={activeTab === 'goods' ? "white" : "black"}
                             className="w-5 h-5 "
                         />
-                   {activeTab === 'goods' &&     <span className={`${activeTab === 'goods' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Goods</span>}
+                        {activeTab === 'goods' && <span className={`${activeTab === 'goods' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Goods</span>}
 
                     </button>
                     <button
@@ -142,20 +146,20 @@ const FeedPage: React.FC = () => {
                             fillColor={activeTab === 'services' ? "white" : "black"}
                             className="w-5 h-5 "
                         />
-                        {activeTab === 'services' &&   <span className={`${activeTab === 'services' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Services</span>}
+                        {activeTab === 'services' && <span className={`${activeTab === 'services' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Services</span>}
                     </button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {/* {filteredItems.map(item => (
-                        <div key={item.id} className="bg-white p-4 rounded-md shadow">
-                            <h2 className="text-xl font-bold">{item.name}</h2>
-                            <p className="mt-2">{item.description}</p>
-                        </div>
-                    ))} */}
-
-                    <div>
-                        
-                    </div>
+                <div className="grid grid-cols-2 gap-2">
+                    {filteredItems.map(item => (
+                        <ItemCard
+                            key={item.id}
+                            id={item.id}
+                            name={item.name}
+                            description={item.description}
+                            image={item.image}
+                            price={item.price}
+                        />
+                    ))}
                 </div>
             </div>
         </Layer>
