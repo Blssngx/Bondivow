@@ -115,8 +115,8 @@ const FeedPage: React.FC = () => {
 
     return (
         <Layer>
-            <div className="min-h-screen rounded-3xl p-4 bg-gray-100">
-                <div className="flex justify-center mb-8">
+            <div className="min-h-screen rounded-3xl p-2 bg-gray-100">
+                <div className="flex mb-8">
                     <button
                         className={classNames(
                             'px-4 py-2 rounded-full transition-colors flex items-center justify-center contect-place-center`',
