@@ -55,7 +55,7 @@ export default function Home() {
     return (
         <Layer>
             <div className="bg-gray-100 min-h-screen p-4 rounded-xl">
-                <h1 className="text-3xl font-bold text-center mb-4">Community Pool Overview</h1>
+                {/* <h1 className="text-3xl font-bold text-center mb-4">Community Pool Overview</h1> */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                     <div className="h-24 text-center text-white bg-neutral-500 rounded-full flex flex-col justify-center items-center">
                         <p className="text-neutral-950 text-lg">${poolData.totalFunds}</p>
