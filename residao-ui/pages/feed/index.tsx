@@ -146,12 +146,16 @@ const FeedPage: React.FC = () => {
                     </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {filteredItems.map(item => (
+                    {/* {filteredItems.map(item => (
                         <div key={item.id} className="bg-white p-4 rounded-md shadow">
                             <h2 className="text-xl font-bold">{item.name}</h2>
                             <p className="mt-2">{item.description}</p>
                         </div>
-                    ))}
+                    ))} */}
+
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
         </Layer>
