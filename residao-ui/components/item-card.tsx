@@ -39,8 +39,8 @@ const ItemCard: React.FC<ItemCardProps> = ({ id, name, description, image, price
             <p className="text-gray-600 mt-2">{description}</p>
             <p className="text-gray-800 font-bold mt-2">${price}</p> */}
 
-            <div className="absolute rounded-lg inset-0 z-20 bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-2 text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
-                <span className="text-xs font-semibold uppercase text-green-300">
+            <div className="absolute rounded-lg inset-0 z-20 bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-3 text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
+                <span className="text-md font-semibold uppercase text-green-300">
                     ${price}
                 </span>
                 <p className="my-2 text-xl font-bold">{name}</p>
