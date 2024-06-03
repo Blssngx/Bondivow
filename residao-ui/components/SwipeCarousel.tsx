@@ -7,6 +7,7 @@ import onbording_3 from "../img/onboarding_3.svg";
 import onbording_4 from "../img/onboarding_4.svg";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { Icons } from "./icons";
 
 
 const imgs = [
@@ -16,7 +17,7 @@ const imgs = [
     "../img/onboarding_4.svg",
 ];
 
-const ONE_SECOND = 1000;
+const ONE_SECOND = 300;
 const AUTO_DELAY = ONE_SECOND * 10;
 const DRAG_BUFFER = 50;
 
@@ -113,7 +114,8 @@ export const SwipeCarousel = () => {
 
     return (
         <div className={`${bgColor(imgIndex)} relative overflow-hidden h-[90vh] items-center place-content-center justify-center`}>
-            <div className="w-full absolute top-10 px-5 ">
+            <div className="w-full absolute top-10 px-5 items-center justify-center">
+
                 <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
             </div>
             <motion.div
@@ -153,10 +155,13 @@ export const SwipeCarousel = () => {
                                 alt="onboarding"
                                 className="w-6/12 pl-5 shrink-0 rounded-xl bg-transparent object-cover"
                             />
-                            <div className="mt-4 flex w-full justify-center gap-2 space-x-2">
+
+                            <div className="mt-4 flex w-full justify-center gap-2 space-x-2 py-5">
+
                                 <div className="items-center text-center px-5">
-                                    <h1 className="text-4xl font-bold w-10/12 py-5 text-left">{title(imgIndex)}</h1>
-                                    <p className="pb-10 text-left">{subTitle(imgIndex)}</p>
+                                    {/* <Icons.logo className="w-8 h-8" /> */}
+                                    <h1 className="text-4xl font-bold w-10/12 pb-2 text-left">{title(imgIndex)}</h1>
+                                    <p className="pb-10 text-left italics">{subTitle(imgIndex)}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -164,17 +169,17 @@ export const SwipeCarousel = () => {
                 })}
 
             </motion.div>
-            <div className="w-full absolute bottom-20 px-5 ">
+            <div className="w-full absolute bottom-10 px-5 ">
                 <div className="flex space-x-2 ">
                     <Link
-                        href="/sign-in"
+                        href="/feed"
                         className="text-black w-full border-none"
                     >
                         <Button type="button"
                             className="text-black w-full h-[45px] bg-transparent rounded-[25px] border-[1px] border-black"
                             variant={"secondary"}
                         >
-                           Get Started
+                            Get Started
                         </Button>
                     </Link>
                 </div >
