@@ -102,3 +102,197 @@ const FeedPage: React.FC = () => {
 };
 
 export default FeedPage;
+
+
+// src/pages/FeedPage.tsx
+
+// import React, { useEffect, useState } from 'react';
+// import { ethers } from 'ethers';
+// import { useAccount, useDisconnect } from 'wagmi';
+// import { useReadContract, useWriteContract, usePrepareTransactionRequest } from 'wagmi';
+// import classNames from 'classnames';
+// import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../constants';
+// import ItemCard from '@/components/ItemCard';
+
+// interface Item {
+//   id: number;
+//   name: string;
+//   description: string;
+//   type: 'goods' | 'services';
+//   image: string;
+//   price: string;
+// }
+
+// const FeedPage: React.FC = () => {
+//   const { address, isConnected } = useAccount();
+//   const { disconnect } = useDisconnect();
+
+//   const [items, setItems] = useState<Item[]>([]);
+//   const [activeTab, setActiveTab] = useState<'goods' | 'services'>('goods');
+//   const [searchTerm, setSearchTerm] = useState('');
+//   const [newGood, setNewGood] = useState({ name: '', description: '', image: '', price: '' });
+//   const [loading, setLoading] = useState(false);
+
+//   const { data: goodsCountData } = useReadContract({
+//     address: CONTRACT_ADDRESS,
+//     abi: CONTRACT_ABI,
+//     functionName: 'nextGoodId',
+//   });
+
+//   const { data: goodsData, refetch: refetchGoods } = useReadContract({
+//     address: CONTRACT_ADDRESS,
+//     abi: CONTRACT_ABI,
+//     functionName: 'getGoods',
+//   });
+
+//   const { config: listGoodConfig } = usePrepareTransactionRequest({
+//     address: CONTRACT_ADDRESS,
+//     abi: CONTRACT_ABI,
+//     functionName: 'listGood',
+//     args: [newGood.name, newGood.description, newGood.image, ethers.utils.parseUnits(newGood.price, 'ether')],
+//   });
+
+//   const { write: listGoodWrite } = useWriteContract(listGoodConfig);
+
+//   useEffect(() => {
+//     if (isConnected && goodsData) {
+//       const goodsArray = goodsData.map((good: any) => ({
+//         id: good.id.toNumber(),
+//         name: good.name,
+//         description: good.description,
+//         image: good.image,
+//         price: ethers.utils.formatUnits(good.price, 'ether'),
+//         type: 'goods',
+//       }));
+//       setItems(goodsArray);
+//     }
+//   }, [isConnected, goodsData]);
+
+//   const listGood = async () => {
+//     try {
+//       setLoading(true);
+//       await listGoodWrite?.();
+//       refetchGoods();
+//       setNewGood({ name: '', description: '', image: '', price: '' });
+//     } catch (error) {
+//       console.error('Error listing good:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const purchaseGood = async (id: number, price: string) => {
+//     const { config: purchaseGoodConfig } = usePrepareTransactionRequest({
+//       address: CONTRACT_ADDRESS,
+//       abi: CONTRACT_ABI,
+//       functionName: 'purchaseGood',
+//       args: [id],
+//     });
+
+//     const { write: purchaseGoodWrite } = useWriteContract(purchaseGoodConfig);
+
+//     try {
+//       setLoading(true);
+//       await purchaseGoodWrite?.();
+//       refetchGoods();
+//     } catch (error) {
+//       console.error('Error purchasing good:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const filteredItems = items
+//     .filter(item => item.type === activeTab)
+//     .filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+//   return (
+//     <div className="min-h-screen rounded-3xl p-4 bg-gray-100">
+//       {!isConnected ? (
+//         <p>Please connect your wallet to interact with the marketplace.</p>
+//       ) : (
+//         <>
+//           <button onClick={() => disconnect()} className="bg-red-500 text-white py-2 px-4 rounded-full mb-4">Disconnect</button>
+//           <div className="flex justify-center mb-4">
+//             <button
+//               className={classNames(
+//                 'px-4 py-2 rounded-full transition-colors flex items-center justify-center',
+//                 activeTab === 'goods' ? 'text-white bg-black' : 'text-black bg-white'
+//               )}
+//               onClick={() => setActiveTab('goods')}
+//             >
+//               Goods
+//             </button>
+//             <button
+//               className={classNames(
+//                 'px-4 py-2 rounded-full transition-colors flex items-center justify-center ml-2',
+//                 activeTab === 'services' ? 'text-white bg-black' : 'text-black bg-white'
+//               )}
+//               onClick={() => setActiveTab('services')}
+//             >
+//               Services
+//             </button>
+//           </div>
+//           <div className="mb-4">
+//             <input
+//               type="text"
+//               placeholder="Search items..."
+//               className="w-full p-2 rounded-full border border-gray-300"
+//               value={searchTerm}
+//               onChange={(e) => setSearchTerm(e.target.value)}
+//             />
+//           </div>
+//           <div className="mb-4">
+//             <h2>List New Good</h2>
+//             <input
+//               type="text"
+//               placeholder="Name"
+//               value={newGood.name}
+//               onChange={(e) => setNewGood({ ...newGood, name: e.target.value })}
+//               className="w-full p-2 rounded-full border border-gray-300 mb-2"
+//             />
+//             <input
+//               type="text"
+//               placeholder="Description"
+//               value={newGood.description}
+//               onChange={(e) => setNewGood({ ...newGood, description: e.target.value })}
+//               className="w-full p-2 rounded-full border border-gray-300 mb-2"
+//             />
+//             <input
+//               type="text"
+//               placeholder="Image URL"
+//               value={newGood.image}
+//               onChange={(e) => setNewGood({ ...newGood, image: e.target.value })}
+//               className="w-full p-2 rounded-full border border-gray-300 mb-2"
+//             />
+//             <input
+//               type="number"
+//               placeholder="Price in cUSD"
+//               value={newGood.price}
+//               onChange={(e) => setNewGood({ ...newGood, price: e.target.value })}
+//               className="w-full p-2 rounded-full border border-gray-300 mb-2"
+//             />
+//             <button onClick={listGood} disabled={loading} className="bg-blue-500 text-white py-2 px-4 rounded-full">
+//               {loading ? 'Listing...' : 'List Good'}
+//             </button>
+//           </div>
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+//             {filteredItems.map(item => (
+//               <ItemCard
+//                 key={item.id}
+//                 id={item.id}
+//                 name={item.name}
+//                 description={item.description}
+//                 image={item.image}
+//                 price={item.price}
+//                 onPurchase={() => purchaseGood(item.id, item.price)}
+//               />
+//             ))}
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default FeedPage;

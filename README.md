@@ -38,6 +38,8 @@ Residao is built on the Celo blockchain and leverages smart contracts to manage 
 
 2. **Marketplace Contract**
    - Facilitates the creation, management, and execution of transactions for goods and services.
+  
+  - GoodsMarketPlace Contract: 0xfB9c21D630a796389bDA2eFE7e1cFfD9b10fE26e
 
 3. **Loan Management Contract**
    - Handles the issuance, management, and repayment of community-backed microloans.

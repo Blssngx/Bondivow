@@ -24,6 +24,7 @@ import {
     http,
 } from "viem";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const cUSDTokenAddressTestnet = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 
@@ -133,7 +134,7 @@ const RoundedDrawerNav = ({
     const formatCurrency = (amount: number | bigint) =>
         new Intl.NumberFormat('en-US', { style: 'decimal', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount);
 
-
+    const image = "https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
     return (
         <>
             <nav
@@ -204,24 +205,29 @@ const RoundedDrawerNav = ({
                                       {userAddress}
                                     </p> */}
                                     <div className="flex justify-between h-50 mt-5 gap-1">
-                                        <div className="h-25 w-1/2 p-4 text-white bg-[#D6DFEA] rounded-xl">
-                                            <div className="flex items-center justify-between mb-5">
-                                                <div>
-                                                    <p className="text-[#353535] font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
-                                                    <p className="text-[#353535] text-xs">+12.5%</p>
-                                                </div>
-                                                <div className="rounded-full bg-white p-2">
-                                                    <FiArrowUpRight className="text-[#353535] h-6 w-6" />
-                                                </div>
-                                            </div>
-                                            <p className="text-[#353535] font-bold">Resident</p>
+                                        <div className="h-25 w-1/2 p-4 text-white bg-[#D6DFEA] rounded-xl"
+                                            style={{
+                                                backgroundImage: `url(${image || ""})`,
+                                                backgroundPosition: "center",
+                                                backgroundSize: "cover",
+                                            }}
+                                            onClick={() => {
+                                                window.location.href = `https://explorer.celo.org/alfajores/address/${address}`;
+                                            }}
+                                        >
+
+                                            <p className="mt-5 pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-white to-gray-300/80 bg-clip-text text-center text-3xl p-1 font-bold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+                                                Resident
+                                            </p>
+                                            {/* <p className="text-xs">  {userAddress}
+                                            </p> */}
                                         </div>
 
                                         <div className="h-25 w-1/2 p-4 text-white bg-transparent border border-white rounded-xl ">
                                             <div className="flex items-center justify-between mb-5">
                                                 <div>
                                                     <p className="font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
-                                                    <p className="text-xs text-white">+12.5%</p>
+                                                    {/* <p className="text-xs text-white">+12.5%</p> */}
                                                 </div>
                                                 <Link href="/voucher" className="rounded-full bg-white p-2">
                                                     <FiPlus className="text-[#353535] h-6 w-6" />

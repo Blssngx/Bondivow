@@ -43,11 +43,8 @@ function App({ Component, pageProps }: AppProps) {
         <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
                 <RainbowKitProvider>
-                    {/* <Layout> */}
-
                     <Component {...pageProps} />
                     <Toaster />
-                    {/* </Layout> */}
                 </RainbowKitProvider>
             </QueryClientProvider>
         </WagmiProvider>
