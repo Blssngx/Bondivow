@@ -8,6 +8,7 @@ import {
     erc20Abi,
     formatEther,
 } from "viem";
+import { Button } from "@/components/ui/button";
 
 const cUSDTokenAddressTestnet = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 
@@ -34,12 +35,35 @@ export default function GlobeDemo() {
                 <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
             </div>
             <div className="bg-background p-3 rounded-3xl">
-                <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-400/80 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">Total Fund</p>
+                <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-400/80 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">Total Funds</p>
                 <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-500/80 bg-clip-text text-center text-5xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
                     ${formatCurrency(Number(formatEther(balance || BigInt(0))))}
                 </p>
                 <p className="mt-5 pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-500/80 bg-clip-text text-center text-sm border p-1 rounded-full font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">{daoAddress}</p>
             </div>
+
+            <div className="flex grid grid-cols-2">
+                <div className="bg-background p-3 rounded-3xl">
+                    <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-400/80 bg-clip-text text-center text-md font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10  mb-1">Total<br />Contributions</p>
+                    <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-500/80 bg-clip-text text-center text-2xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+                        ${formatCurrency(2 * Number(formatEther(balance || BigInt(0))))}
+                    </p>
+
+                </div>
+
+                <div className="bg-background p-3 rounded-3xl">
+                    <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-400/80 bg-clip-text text-center text-md font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10 mb-1">Total<br />Loans</p>
+                    <p className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-500/80 bg-clip-text text-center text-2xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+                        ${formatCurrency(0.5 * Number(formatEther(balance || BigInt(0))))}
+                    </p>
+
+                </div>
+            </div>
+
+            <div className="w-full p-2">
+                <Button className="mt-5 rounded-full w-full bg-[#353535]">Become a Citizen</Button>
+            </div>
+
         </Layer>
     );
 }
