@@ -25,6 +25,7 @@ import { useAccount } from "wagmi";
 import { FiArrowLeft } from 'react-icons/fi';
 import { Layer } from '@/components/RoundedDrawerNav';
 import Ripple from '@/components/magicui/ripple';
+import Link from 'next/link';
 
 const FormSchema = z.object({
     pin: z.string().min(6, {
@@ -51,7 +52,7 @@ const VoucherPage: React.FC = () => {
         <Layer>
             <div className="relative flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg border bg-background p-20 md:shadow-xl">
                 <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-white">
-                  Voucher
+                    Voucher
                 </p>
                 <Ripple />
             </div>
@@ -82,7 +83,7 @@ export function InputOTPForm({ address }: { address: string }) {
     async function onSubmit(data: z.infer<typeof FormSchema>): Promise<void> {
         console.log(data.pin)
         try {
-            const res = await fetch('http://localhost:8080/api/getVoucher/', {
+            const res = await fetch('https://residao-voucher.vercel.app/api/getVoucher/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -154,10 +155,9 @@ export function InputOTPForm({ address }: { address: string }) {
                 </form>
             </Form>
             {transactionHash && (
-                <div>
-                    <h2>Transaction Hash</h2>
-                    <p>{transactionHash}</p>
-                </div>
+                <Link href={transactionHash}>
+                    View transaction
+                </Link>
             )}
             {error && (
                 <div>
