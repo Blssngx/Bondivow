@@ -200,23 +200,10 @@ const RoundedDrawerNav = ({
                         >
                             {isConnected ? (
                                 <>
-                                    {/* <div className="h2 text-center text-white">
-                            Your address: {userAddress}
-                        </div> */}
+                                    {/* <p className="mt-5 pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-500/80 bg-clip-text text-center text-sm border p-1 rounded-full font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+                                      {userAddress}
+                                    </p> */}
                                     <div className="flex justify-between h-50 mt-5 gap-1">
-                                        <div className="h-25 w-1/2 p-4 text-white bg-[#D6DFEA] rounded-xl ">
-                                            <div className="flex items-center justify-between mb-5">
-                                                <div>
-                                                    <p className="text-[#353535] font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
-                                                    <p className="text-[#353535] text-xs">+12.5%</p>
-                                                </div>
-                                                <Link href="/voucher" className="rounded-full bg-white p-2">
-                                                    <FiPlus className="text-[#353535] h-6 w-6" />
-                                                    {/* <FiArrowUpRight className="text-[#353535] h-6 w-6" /> */}
-                                                </Link>
-                                            </div>
-                                            <p className="text-[#353535] font-bold">Balance</p>
-                                        </div>
                                         <div className="h-25 w-1/2 p-4 text-white bg-[#D6DFEA] rounded-xl">
                                             <div className="flex items-center justify-between mb-5">
                                                 <div>
@@ -227,8 +214,22 @@ const RoundedDrawerNav = ({
                                                     <FiArrowUpRight className="text-[#353535] h-6 w-6" />
                                                 </div>
                                             </div>
-                                            <p className="text-[#353535] font-bold">Income</p>
+                                            <p className="text-[#353535] font-bold">Resident</p>
                                         </div>
+
+                                        <div className="h-25 w-1/2 p-4 text-white bg-transparent border border-white rounded-xl ">
+                                            <div className="flex items-center justify-between mb-5">
+                                                <div>
+                                                    <p className="font-bold text-xl">${formatCurrency(Number(formatEther(balance || BigInt(0))))}</p>
+                                                    <p className="text-xs text-white">+12.5%</p>
+                                                </div>
+                                                <Link href="/voucher" className="rounded-full bg-white p-2">
+                                                    <FiPlus className="text-[#353535] h-6 w-6" />
+                                                </Link>
+                                            </div>
+                                            <p className="font-semibold">Balance</p>
+                                        </div>
+
                                     </div>
 
 
