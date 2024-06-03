@@ -175,11 +175,11 @@ const RoundedDrawerNav = ({
                         )}
                     </button>
                 </div>
-                {isConnected ? (
+                {/* {isConnected ? (
 
                     <div className="h2 text-center text-white">
                         Your address: {userAddress}
-                    </div>) : (<div className="h2 text-center text-white">Open using Opera MiniPay</div>)}
+                    </div>) : (<div className="h2 text-center text-white">Open using Opera MiniPay</div>)} */}
 
                 {/* {!isConnected && (
                        <div className="h2 text-center text-white">No Wallet Connected</div>)}

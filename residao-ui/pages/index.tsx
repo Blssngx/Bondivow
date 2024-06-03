@@ -1,11 +1,14 @@
-import { Layer } from "@/components/RoundedDrawerNav";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
+import Lottie from "lottie-react";
+import loader from "@/components/lottie/loader.json";
 
 export default function Home() {
     const [userAddress, setUserAddress] = useState("");
     const [isMounted, setIsMounted] = useState(false);
     const { address, isConnected } = useAccount();
+    const router = useRouter();
 
     useEffect(() => {
         setIsMounted(true);
@@ -14,26 +17,18 @@ export default function Home() {
     useEffect(() => {
         if (isConnected && address) {
             setUserAddress(address);
+            router.push("/welcome"); // Redirect to another page
         }
-    }, [address, isConnected]);
+    }, [address, isConnected, router]);
 
     if (!isMounted) {
         return null;
     }
 
     return (
-        // <div className="flex flex-col justify-center items-center">
-        //     <div className="h1">
-        //         There you go... a canvas for your next Celo project!
-        //     </div>
-        //     {isConnected ? (
-        //         <div className="h2 text-center">
-        //             Your address: {userAddress}
-        //         </div>
-        //     ) : (
-        //         <div>No Wallet Connected</div>
-        //     )}
-        // </div>
-        <Layer></Layer>
+        <>
+            <h1>Connecting to your wallet...</h1>
+            <Lottie animationData={loader} loop={true} />
+        </>
     );
 }

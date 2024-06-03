@@ -149,7 +149,7 @@ const FeedPage: React.FC = () => {
                         {activeTab === 'services' && <span className={`${activeTab === 'services' ? "text-white" : "text-black"} font-bold text-xs uppercase ml-1`}>Services</span>}
                     </button>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2">
                     {filteredItems.map(item => (
                         <ItemCard
                             key={item.id}
