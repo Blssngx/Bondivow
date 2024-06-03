@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.get('/', (req, res) => res.send('Welcome to the Residao Voucher API'));
+app.get('/', (req, res) => res.send('Welcome to the Residao Voucher API v1.0.1'));
 app.use("/api/getVoucher", getVoucher);
 
 const port = process.env.PORT || 8080;

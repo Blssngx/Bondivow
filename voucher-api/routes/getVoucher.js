@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
         const toAddress = req.body.toAddress;
         const token = req.body.token;
 
-        let stringToken = "123456789";
+        let stringToken = "12345678";
         if (token !== stringToken) {
             return res.status(404).send({ message: "Voucher is Invalid" });
         }
