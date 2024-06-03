@@ -15,7 +15,7 @@ interface ItemCardProps {
     price: string;
 }
 
-const CARD_WIDTH = 195;
+const CARD_WIDTH = 180;
 const CARD_HEIGHT = 180;
 const MARGIN = 20;
 
@@ -34,10 +34,10 @@ const ItemCard: React.FC<ItemCardProps> = ({ id, name, description, image, price
 
             <button
                 onClick={() => setIsOpen(true)}
-                className="relative shrink-0 cursor-pointer rounded-lg bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
+                className="relative w-full h-[150px] shrink-0 cursor-pointer rounded-lg bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
                 style={{
-                    width: CARD_WIDTH,
-                    height: CARD_HEIGHT,
+                    // width: CARD_WIDTH,
+                    // height: CARD_HEIGHT,
                     marginRight: MARGIN,
                     backgroundImage: `url(${image || ""})`,
                     backgroundPosition: "center",
