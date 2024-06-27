@@ -301,6 +301,8 @@
 import { useEffect, useState } from "react";
 import PrimaryButton from "@/components/Button";
 import { useWeb3 } from "@/context/useWeb3";
+import TransferCUSD from "@/components/dApps/TransferCUSD";
+import PayTokenFunctionCall from "@/components/dApps/PayTokenFunctionCall";
 
 export default function Home() {
     const {
@@ -361,61 +363,73 @@ export default function Home() {
     };
 
     return (
-        <div className="mx-auto p-6 bg-pink-100 shadow-lg">
-            {address ? (
-                <>
-                    <div className="grid grid-cols-1 gap-6">
-                        <input
-                            type="text"
-                            placeholder="Recipient Address"
-                            value={recipient}
-                            onChange={(e) => setRecipient(e.target.value)}
-                            className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Amount to Send"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        {errorMessage && (
-                            <div className="text-blue-800 text-sm">
-                                {errorMessage}
-                            </div>
-                        )}
-                        <PrimaryButton
-                            loading={signingLoading}
-                            onClick={sendingCUSD}
-                            title="Send"
-                            widthFull
-                        />
-                    </div>
-                    <div className="mt-6">
-                        <div className="text-center">
-                            <span className="font-semibold">Receiver:</span> {recipient}
-                        </div>
-                        <div className="text-center mt-2">
-                            <span className="font-semibold">Amount:</span> {amount} cUSD
-                        </div>
-                    </div>
-                    {transactionStatus && (
-                        <div className="mt-4 text-center text-lg font-semibold">
-                            Transaction Status: {transactionStatus}
-                        </div>
-                    )}
-                </>
-            ) : (
-                <div className="text-center text-xl font-semibold text-pink-100">
+        // <div className="mx-auto p-6 bg-pink-100 shadow-lg">
+        //     {address ? (
+        //         <>
+        //             <div className="grid grid-cols-1 gap-6">
+        //                 <input
+        //                     type="text"
+        //                     placeholder="Recipient Address"
+        //                     value={recipient}
+        //                     onChange={(e) => setRecipient(e.target.value)}
+        //                     className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        //                 />
+        //                 <input
+        //                     type="text"
+        //                     placeholder="Amount to Send"
+        //                     value={amount}
+        //                     onChange={(e) => setAmount(e.target.value)}
+        //                     className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        //                 />
+        //                 {errorMessage && (
+        //                     <div className="text-blue-800 text-sm">
+        //                         {errorMessage}
+        //                     </div>
+        //                 )}
+        //                 <PrimaryButton
+        //                     loading={signingLoading}
+        //                     onClick={sendingCUSD}
+        //                     title="Send"
+        //                     widthFull
+        //                 />
+        //             </div>
+        //             <div className="mt-6">
+        //                 <div className="text-center">
+        //                     <span className="font-semibold">Receiver:</span> {recipient}
+        //                 </div>
+        //                 <div className="text-center mt-2">
+        //                     <span className="font-semibold">Amount:</span> {amount} cUSD
+        //                 </div>
+        //             </div>
+        //             {transactionStatus && (
+        //                 <div className="mt-4 text-center text-lg font-semibold">
+        //                     Transaction Status: {transactionStatus}
+        //                 </div>
+        //             )}
+        //         </>
+        //     ) : (
+        //         <div className="text-center text-xl font-semibold text-pink-100">
                     
-                </div>
-            )}
-            {tx && (
-                <div className="mt-4 text-center text-lg font-semibold">
-                    Tx Completed: {tx.transactionHash.substring(0, 6)}...
-                    {tx.transactionHash.substring(tx.transactionHash.length - 6)}
-                </div>
-            )}
-        </div>
+        //         </div>
+        //     )}
+        //     {tx && (
+        //         <div className="mt-4 text-center text-lg font-semibold">
+        //             Tx Completed: {tx.transactionHash.substring(0, 6)}...
+        //             {tx.transactionHash.substring(tx.transactionHash.length - 6)}
+        //         </div>
+        //     )}
+        // </div>
+        <div
+        style={{
+            marginTop: "20px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "12px",
+        }}
+    >
+        <TransferCUSD />
+        {/* <PayTokenFunctionCall /> */}
+    </div>
     );
 }
