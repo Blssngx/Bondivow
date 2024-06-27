@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 // import StableTokenABI from "./cusd-abi.json";
 // const { stableTokenABI } = require("@celo/abis");
