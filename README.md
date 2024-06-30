@@ -1,65 +1,105 @@
-# Residao
+# Bondivow
 
-Residao is a decentralized platform designed to empower underserved communities by facilitating the trade of goods and services and providing access to community-backed microloans. By leveraging blockchain technology, Residao ensures secure, transparent, and efficient transactions within local communities, fostering economic growth and cooperation.
+Bondivow is a blockchain-based commitment app that allows users to set goals and make pledges, leveraging the Celo Network for secure and transparent smart contracts. The app uses Solidity for smart contracts, Next.js for the frontend, and Node.js for the backend server.
 
-## Introduction
+## Table of Contents
 
-Residao aims to provide a decentralized marketplace where residents of rural areas, small villages, and informal sectors can trade goods and services and access financial support through a community-managed pool. Built on the Celo blockchain, Residao ensures transparency, security, and community-driven governance.
+- [Bondivow](#bondivow)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Steps](#steps)
+  - [Usage](#usage)
+  - [Smart Contracts](#smart-contracts)
+    - [Compile Contracts](#compile-contracts)
+
+## Project Overview
+
+Bondivow helps users achieve their goals by creating commitment contracts. Users can set goals, put something at stake (e.g., money), and designate a referee to monitor their progress. The app leverages the Celo blockchain to ensure transparency and security in the commitment process.
 
 ## Features
 
-- **Decentralized Marketplace**: Peer-to-peer trading of goods and services.
-- **Community-backed Microloans**: Access to small loans from a community pool.
-- **User Verification with Soulbound NFTs**: Users earn non-transferable (soulbound) NFTs as they complete tasks and progress through different levels (Tourist, Resident, Citizen, Noble Citizen).
-- **Transparent and Secure Transactions**: All transactions are managed via smart contracts on the Celo blockchain.
-- **Community-driven Governance**: Users participate in decision-making processes through a decentralized governance model.
+- User authentication and profile management
+- Goal setting and tracking
+- Pledge management
+- Smart contracts for commitment and reward distribution
+- Notifications and reminders
 
-## Getting Started
+## Tech Stack
 
-To get started with Residao, follow the instructions below to set up your development environment.
+- **Frontend**: Next.js
+- **Backend**: Node.js, Express.js
+- **Blockchain**: Celo Network, Solidity for smart contracts
+- **Database**: MongoDB
+- **External Services**: Payment gateway, notification systems
 
-[Build on MiniPay](https://docs.celo.org/developer/build-on-minipay/overview)
+## Installation
 
-## Architecture
+### Prerequisites
 
-Residao is built on the Celo blockchain and leverages smart contracts to manage transactions, user verification, and governance. The key components include:
+- Node.js and npm installed
+- MongoDB installed and running
+- Celo Wallet and Celo CLI installed
 
-- **Smart Contracts**: Manage core functionalities such as user registration, marketplace transactions, loan management, and governance.
-- **Frontend**: A user-friendly interface for interacting with the Residao platform.
-- **Backend**: Handles off-chain processes and interactions with the blockchain.
+### Steps
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/blssngx/bondivow.git
+    cd bondivow
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    npm install
+    cd frontend
+    npm install
+    cd ../backend
+    npm install
+    ```
+
+3. **Setup environment variables:**
+    - Create a `.env` file in the root, `frontend`, and `backend` directories and add the necessary environment variables. Refer to `.env.example` for the required variables.
+
+4. **Compile the smart contracts:**
+    ```bash
+    cd smart-contracts
+    npx hardhat compile
+    ```
+
+5. **Deploy the smart contracts to the Celo testnet:**
+    ```bash
+    npx hardhat run scripts/deploy.js --network alfajores
+    ```
+
+6. **Run the backend server:**
+    ```bash
+    cd backend
+    npm start
+    ```
+
+7. **Run the frontend:**
+    ```bash
+    cd frontend
+    npm run dev
+    ```
+
+## Usage
+
+1. Open your browser and navigate to `http://localhost:3000`.
+2. Register and log in to your account.
+3. Set your goals and make pledges.
+4. Monitor your progress and receive notifications.
 
 ## Smart Contracts
 
-### Key Contracts
+The smart contracts are written in Solidity and deployed on the Celo network.
 
-1. **User Registration and Verification Contract**
-   - Manages user sign-ups and verification processes.
-   - Issues Tourist-level soulbound NFTs upon successful registration.
+### Compile Contracts
 
-2. **Marketplace Contract**
-   - Facilitates the creation, management, and execution of transactions for goods and services.
-  
-  - GoodsMarketPlace Contract: 0xfB9c21D630a796389bDA2eFE7e1cFfD9b10fE26e
-
-3. **Loan Management Contract**
-   - Handles the issuance, management, and repayment of community-backed microloans.
-
-4. **Soulbound NFT Issuance and Management Contract**
-   - Manages the creation and distribution of non-transferable NFTs for user verification and rewards.
-   - Ensures NFTs are soulbound, meaning they cannot be transferred or traded.
-
-5. **Governance Contract**
-   - Facilitates decentralized governance and decision-making processes.
-
-### Deployment
-
-Smart contracts are deployed on the Celo blockchain, ensuring transparency and security for all platform operations.
-
-## Technologies
-
-- **Blockchain**: Celo
-- **Smart Contracts**: Solidity
-- **Frontend**: Next.js, Jotai
-- **Backend**: Node.js, Express
-- **Database**: MongoDB (for off-chain data)
-- **Development Tools**: Truffle, Ganache, Celo Composer
+```bash
+cd smart-contracts
+npx hardhat compile
