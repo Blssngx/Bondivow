@@ -146,7 +146,7 @@ const RoundedDrawerNav = ({
                         <div className="flex">
                             <Logo />
                             <span className="text-xl font-bold text-neutral-50">
-                                Residao
+                                BondiVow
                             </span>
                         </div>
 
